@@ -8,22 +8,34 @@ class ExerciseController {
       exercise_desc,
       exercise_level,
     })
-  }
+  } //专家添加题目
 
   async deleteExercise(req) {
     const { _id } = req.body
     return await exerciseService.updateDeleteStatus(_id)
-  }
+  }//删除题目
+
+  // async updateExercise(req) {
+  //   const { _id, exercise_type, exercise_desc, exercise_level } = req.body
+  //   console.log("代码执行完成controller");
+  //   return await exerciseService.updateExercise({
+  //     _id,
+  //     exercise_type,
+  //     exercise_desc,
+  //     exercise_level,
+  //   })
+  // }//更新题目？？
 
   async updateExercise(req) {
     const { _id, exercise_type, exercise_desc, exercise_level } = req.body
+    
     return await exerciseService.updateExercise({
       _id,
       exercise_type,
       exercise_desc,
       exercise_level,
     })
-  }
+  }//更新题目（v2.0）
 
   getExerciseType() {
     return exerciseService.getExerciseType()
@@ -36,7 +48,7 @@ class ExerciseController {
   async getExerciseById(req) {
     const _id = req.query
     return await exerciseService.findExerciseById(_id)
-  }
+  }//由ID获取题目
 
   async getExerciseByType(req) {
     const { exercise_type } = req.body

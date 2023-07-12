@@ -10,15 +10,12 @@ router.patch("/exercise/update", wrapper(exerciseController.updateExercise));
 
 router.get("/exercise/gettype", wrapper(exerciseController.getExerciseType));
 router.get("/exercise/getlevel", wrapper(exerciseController.getExerciseLevel));
+
 router.get("/exercise/getbyid", wrapper(exerciseController.getExerciseById));
-router.get(
-  "/exercise/getbytype",
-  wrapper(exerciseController.getExerciseByType)
-);
-router.post(
-  "/exercise/generate",
-  wrapper(exerciseController.generateExercises)
-);
+router.get("/exercise/getbytype",wrapper(exerciseController.getExerciseByType));
+
+router.post("/exercise/generate",wrapper(exerciseController.generateExercises));
+
 router.post("/exercise/getlist", wrapper(exerciseController.getList));
 
 module.exports = router;

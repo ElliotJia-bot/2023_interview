@@ -1,3 +1,4 @@
+//这里是mongodb配置
 const mongoose = require("mongoose");
 
 const exerciseSchema = new mongoose.Schema(

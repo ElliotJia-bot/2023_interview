@@ -1,6 +1,20 @@
 const interviewrecordService = require('../service/interviewrecord')
 
 class InterviewrecordController {
+
+   // async createRecord(req) {
+  //   const { 
+  //       _idinterview_mas,
+  //       interview_stu,
+  //       interview_start,
+  //       interview_end, } = req.body
+  //   return await interviewrecordService.createRecord(
+  //     _idinterview_mas,
+  //     interview_stu,
+  //     interview_start,
+  //     interview_end,)
+  // }
+  
   async deleteRecord(req) {
     const { _id } = req.body
     return await interviewrecordService.updateDeleteStatus(_id)

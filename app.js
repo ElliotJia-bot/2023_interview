@@ -2,17 +2,16 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const { errorConfig, notExistConfig } = require('./middlewares/error')
-const httpHeader = require('./middlewares/httpHeader')
-const { loadEnv } = require('./config/env')
-const connectDB = require('./config/db')
-const { loadRouter } = require('./routes/index')
-
+const { errorConfig, notExistConfig } = require('./middlewares/error');
+const httpHeader = require('./middlewares/httpHeader');
+const { loadEnv } = require('./config/env');
+const connectDB = require('./config/db');
+const { loadRouter } = require('./routes/index');
 
 const app = express();
 
-loadEnv() // 加载env环境
-connectDB() // 连接数据库
+loadEnv(); // 加载env环境
+connectDB(); // 连接数据库
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -20,12 +19,23 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('*', httpHeader)
-app.options('*', (_, res) => res.sendStatus(200))
+app.use('*', httpHeader);
 
-loadRouter(app) // 路由加载
+// 启用 CORS
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://localhost:3000');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+  });
+  
 
-app.use(errorConfig) // 404
-app.use(notExistConfig) // 500
+app.options('*', (_, res) => res.sendStatus(200));
+
+
+loadRouter(app); // 路由加载
+
+app.use(errorConfig); // 404
+app.use(notExistConfig); // 500
 
 module.exports = app;
